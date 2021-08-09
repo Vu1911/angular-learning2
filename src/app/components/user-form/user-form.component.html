@@ -1,0 +1,82 @@
+<div class="userFormContainer">
+    <form [formGroup]="userForm" class="text-center border border-light p-5">
+
+        <h4 class="h4">{{userFormTitle}} Account</h4>
+    
+        <div class="formGroup">
+            <label for="username">Username</label>
+            <input class="form-control mb-4" type="text" id="username" formControlName="username" placeholder="{{placeholder.username}}">
+            <span
+                *ngIf="!userForm.get('username')!.valid && userForm.get('username')!.touched && userForm.get('username')!.errors"
+                class="help-block"
+            >
+                <span *ngIf="userForm.get('username')!.errors!['isUsernameDuplicated']">This username has been used!</span>
+                <span *ngIf="userForm.get('username')!.errors!['required']">This field is required!</span>
+            </span>
+        </div>
+    
+        <div class="formGroup">
+            <label for="email">Email</label>
+            <input class="form-control mb-4" type="email" id="email" formControlName="email" placeholder="{{placeholder.email}}">
+            <span
+                *ngIf="!(userForm.get('email')!.valid) && userForm.get('email')!.touched && userForm.get('email')!.errors"
+                class="help-block"
+            >
+                <span *ngIf="userForm.get('email')!.errors!['isEmailDuplicated']">This email has been used!</span>
+                <span *ngIf="userForm.get('email')!.errors!['email']">This is invalid email!</span>
+                <span *ngIf="userForm.get('email')!.errors!['required']">This field is required!</span>
+            </span>
+        </div>
+        
+        <div class="formGroup">
+            <label for="password">Password</label>
+            <input class="form-control mb-4" type="password" id="password" formControlName="password" placeholder="{{placeholder.password}}">
+            <span
+                *ngIf="!(userForm.get('password')!.valid) && userForm.get('password')!.touched && userForm.get('password')!.errors"
+                class="help-block"
+            >
+                <span *ngIf="userForm.get('password')!.errors!['minlength']">Password must be at least 8 character long!</span>
+                <span *ngIf="userForm.get('password')!.errors!['required']">This field is required!</span>
+            </span>
+        </div>
+    
+        <div class="formGroup">
+            <label for="dob">Date of birth</label>
+            <input class="form-control mb-4" type="text" id="dob" formControlName="dob" placeholder="{{placeholder.dob.toLocaleString().split(',')[1]}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
+        </div>
+    
+        <div class="formGroup radio roleRadio">
+            <h5>Role</h5>
+            <label  *ngFor="let role of roles">
+                <input
+                    type="radio"
+                    formControlName="role"
+                    [value]="role"
+                    [checked]="(placeholder)? placeholder.role == role : false"
+                >
+                {{role}}
+            </label>
+            
+        </div>
+    
+        <div class="formGroup radio statusRadio">
+            <h5>Status</h5>
+            <label  *ngFor="let status of statusList">
+                <input
+                    type="radio"
+                    formControlName="status"
+                    [value]="status"
+                    [checked]="(placeholder)? placeholder!.status == status : false"
+                >
+                {{status}}
+            </label>
+        </div>
+    
+        <button class="btn btn-primary" type="button" (click)= "onSubmit(); $event.preventDefault()" [disabled]="!userForm.valid">{{userFormTitle}}</button>
+        <br>
+        <button class="btn btn-secondary" type="button" (click)="onClose()">Cancel</button>
+    
+    
+    </form>
+</div>
+

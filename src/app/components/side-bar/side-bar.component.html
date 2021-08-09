@@ -1,0 +1,7 @@
+<div class="sidebar">
+    <button class="btn btn-outline-primary homebtn" *ngIf="isUser(currentUserRole)" routerLink='/user'><span>H</span></button>
+    <button class="btn btn-outline-primary homebtn" *ngIf="isAdmin(currentUserRole)" routerLink='/admin'><span>H</span></button>
+    <button class="btn btn-outline-primary productbtn" *ngIf="isUser(currentUserRole)" routerLink='/user/product-dashboard'><span>P</span></button>
+    <button class="btn btn-outline-primary userbtn" *ngIf="isAdmin(currentUserRole)" routerLink='/admin/user-dashboard'><span>U</span></button>
+    <button class="btn btn-outline-primary logoutbtn" (click)="onLogout()"><span>L</span></button>
+</div>

@@ -1,0 +1,86 @@
+{
+  "accounts": [
+    {
+      "id": 0,
+      "username": "admin123",
+      "email": "admin@example.com",
+      "password": "123456789",
+      "dob": "2000-11-19T00:00:00.000Z",
+      "status": "Activated",
+      "role": "Admin"
+    },
+    {
+      "id": 1,
+      "username": "user",
+      "email": "user@example.com",
+      "password": "123456789",
+      "dob": "2000-11-19T00:00:00.000Z",
+      "status": "Activated",
+      "role": "User"
+    },
+    {
+      "id": 2,
+      "username": "hant",
+      "email": "sadf@asdfasdf",
+      "password": "123456789",
+      "dob": "2000-02-18",
+      "status": "Activated",
+      "role": "User"
+    },
+    {
+      "id": 3,
+      "username": "vunl",
+      "email": "sadf@asdfasdf",
+      "password": "123456789",
+      "dob": "2000-11-19",
+      "status": "Activated",
+      "role": "User"
+    }
+  ],
+  "products": [
+    {
+      "id": 0,
+      "imgUrl": "src/imgs/default-product-image.png",
+      "title": "Product 0",
+      "quantity": 0,
+      "price": 1,
+      "description": "product 1",
+      "status": "Out of stock",
+      "viewNumber": 5,
+      "buyNumber": 1
+    },
+    {
+      "id": 1,
+      "imgUrl": "src/imgs/default-product-image.png",
+      "title": "product 1",
+      "quantity": 1400,
+      "price": 1000000,
+      "description": "milk",
+      "status": "Selling",
+      "viewNumber": 9,
+      "buyNumber": 4800
+    },
+    {
+      "id": 2,
+      "imgUrl": "src/imgs/default-product-image.png",
+      "title": "Product title 2",
+      "quantity": 1,
+      "price": 1,
+      "description": "alo123",
+      "status": "Selling",
+      "viewNumber": 1,
+      "buyNumber": 0
+    },
+    {
+      "id": 3,
+      "imgUrl": "src/imgs/default-product-image.png",
+      "title": "Product title 3",
+      "quantity": 5,
+      "price": 10,
+      "description": "Description",
+      "status": "Selling",
+      "viewNumber": 1,
+      "buyNumber": 0
+    }
+  ]
+}

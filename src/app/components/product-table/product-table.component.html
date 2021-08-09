@@ -1,0 +1,36 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">title</th>
+        <th scope="col">price</th>
+        <th scope="col">quantity</th>
+        <th scope="col">status</th>
+        <th scope="col">edit</th>
+        <th scope="col">delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of productsShowed">
+            <td>{{product.id}}</td>
+            <td><a [routerLink]="['/user/product', product.id]">{{product.title}}</a></td>
+            <td>{{product.price | currency:'VND'}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.status}}</td>
+            <td><button class="btn btn-warning" (click)="onEdit(product.id)">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="onDelete(product.id)">Delete</button></td>
+        </tr>
+      
+    </tbody>
+</table>
+
+<div class="pagination-bar">
+  <button 
+    *ngFor="let pagenum of pages"
+    (click)="onChoosePage(pagenum)"
+    [ngClass]="pagenum == currentPage ? 'btn btn-primary' : 'btn btn-outline-primary'"
+  >
+    {{pagenum + 1}}
+  </button>
+
+</div>

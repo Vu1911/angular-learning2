@@ -1,0 +1,23 @@
+td {
+    vertical-align: middle;
+}
+
+button {
+    margin: 5px;
+}
+
+.pagination-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination-bar button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}

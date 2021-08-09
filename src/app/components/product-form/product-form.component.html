@@ -1,0 +1,51 @@
+<div class="productFormContainer">
+    <form [formGroup]="productForm" class="text-center border border-light p-5">
+
+        <h4 class="h4">{{productFormTitle}} Product</h4>
+    
+        <div class="formGroup">
+            <label for="imgUrl">ImageUrl</label>
+            <input class="form-control mb-4" type="text" id="imgUrl" formControlName="imgUrl">
+        </div>
+    
+        <div class="formGroup">
+            <label for="title">Title</label>
+            <input class="form-control mb-4" type="text" id="title" formControlName="title">
+        </div>
+    
+        <div class="formGroup">
+            <label for="price">Price in VND</label>
+            <input class="form-control mb-4" type="number" id="price" formControlName="price">
+        </div>
+    
+        <div class="formGroup">
+            <label for="quantity">Quantity</label>
+            <input class="form-control mb-4" type="number" id="quantity" formControlName="quantity">
+        </div>
+        
+        <div class="formGroup">
+            <label for="description">Description</label>
+            <textarea class="form-control" aria-label="With textarea" formControlName="description"></textarea>
+        </div>
+    
+        <div class="formGroup radio statusRadio">
+            <h5>Status</h5>
+            <label  *ngFor="let status of statusList">
+                <input
+                    type="radio"
+                    formControlName="status"
+                    [value]="status"
+                    [checked]="(placeholder)? placeholder!.status == status : false"
+                >
+                {{status}}
+            </label>
+        </div>
+    
+        <button type="button" class="btn btn-primary" (click)= "onSubmit(); $event.preventDefault()" [disabled]="!productForm.valid">{{productFormTitle}}</button>
+        <br>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+    </form>
+</div>
+
+
+

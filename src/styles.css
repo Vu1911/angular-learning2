@@ -1,1 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
+app-root {
+    width: 100vw;
+    position: relative;
+
+}
+
+router-outlet {
+    display: none;
+}
+
+app-side-bar {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    width: 4%;
+    max-width: 200px;
+    min-width: 50px;
+    margin: 0 20px;
+    margin-left: 0px;
+    padding: 20px 2px;
+    height: 100vh;
+    background-color: rgb(147, 147, 253);
+}
+
+app-side-bar:hover  {
+    width: 15%;
+
+}
+
+app-side-bar:hover button span {
+    display: none;
+}
+
+app-side-bar:hover .homebtn::before {
+    content: 'Homepage' !important;
+}
+
+app-side-bar:hover .productbtn::before {
+    content: 'Product Dashboard' !important;
+}
+
+app-side-bar:hover .userbtn::before {
+    content: 'User Dashboard' !important;
+}
+
+app-side-bar:hover .logoutbtn::before {
+    content: 'Log out' !important;
+}
+
+
+.content {
+    max-width: 5000px;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+app-user-dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+app-homepage {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+app-product-dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+app-product-view-page {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}

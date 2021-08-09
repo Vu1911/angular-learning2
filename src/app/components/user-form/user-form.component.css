@@ -1,0 +1,52 @@
+.userFormContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgba(212, 205, 205, 0.541);
+    
+}
+form {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    background-color: white;
+    justify-self: flex-end !important;
+    overflow-y: auto;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+    margin-bottom: 2px !important;
+}
+
+.form-group{
+    margin-bottom: 10px;
+}
+
+span {
+    font-size: small;
+    color: red;
+}
+
+.roleRadio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.statusRadio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
