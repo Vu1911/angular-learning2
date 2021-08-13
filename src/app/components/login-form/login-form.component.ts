@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({})
 
   @Output() loginRequest = new EventEmitter<{username: string, password: string}>()
+  @Input() loginResponse = {status: false, message: ""}
 
   constructor() { }
 

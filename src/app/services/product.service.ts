@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IProduct } from "../interfaces/product.interface";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ProductService {
 
     constructor(private http: HttpClient) {}

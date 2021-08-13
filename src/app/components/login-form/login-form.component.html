@@ -1,10 +1,17 @@
 <form class="text-center border border-light p-5" [formGroup] = "loginForm" (ngSubmit)="onLogin()">
     <h4 class="h4 mb-4">Login</h4>
 
-    <input type="text" class="form-control mb-4" placeholder="Username" formControlName="username" >
+    <div *ngIf="loginResponse.message != '' " [ngClass]="loginResponse.status ? 'alert alert-primary' : 'alert alert-danger'" role="alert">
+        {{loginResponse.message}}
+    </div>
+
+    <div class="formGroup">
+        <input type="text" class="form-control mb-4" placeholder="Username" formControlName="username" >
+    </div>
+    
 
     <input type="password" class="form-control mb-4" placeholder="Password" formControlName="password">
 
-    <button class="btn btn-primary btn-block" type="submit">Login</button>
+    <button class="btn btn-primary btn-block" type="submit" [disabled]='!loginForm.valid'>Login</button>
 
 </form>

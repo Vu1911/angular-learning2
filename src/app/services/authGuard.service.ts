@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { AccountService } from './account.service';
 
 
-@Injectable({providedIn: 'platform'})
+@Injectable({providedIn: 'root'})
 export class AdminGuard implements CanActivate {
     constructor(private accountService : AccountService, private router: Router){}
     
@@ -29,7 +29,7 @@ export class AdminGuard implements CanActivate {
     }
 }
 
-@Injectable({providedIn: 'platform'})
+@Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
     constructor(private accountService : AccountService, private router: Router){}
     
@@ -47,7 +47,7 @@ export class AuthGuard implements CanActivate {
     }
 }
 
-@Injectable({providedIn: 'platform'})
+@Injectable({providedIn: 'root'})
 export class isAreadlyLoginGuard implements CanActivate {
     constructor(private accountService : AccountService, private router: Router){}
     

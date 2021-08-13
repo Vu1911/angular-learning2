@@ -5,5 +5,18 @@
 
     <hr>
 
-    <app-product-view [chosenProduct]="chosenProduct" (buyProduct)="onBuyProduct($event)"></app-product-view>
+    <app-product-view [chosenProduct]="chosenProduct" (transacProduct)="onOpenTransaction($event)"></app-product-view>
+    <app-ioproduct-form  
+        [productId]="requestId" 
+        (onCloseForm)="onCloseTransaction($event)"
+        (submit)="onSubmitTransaction($event)" 
+        *ngIf="isOpenTransaction"  
+    ></app-ioproduct-form>
+
+    <app-donut-chart
+        [data]="data"
+        (isShowChart)="showChart($event)"
+        *ngIf="isShowChart"
+    >
+    </app-donut-chart>
 </div>

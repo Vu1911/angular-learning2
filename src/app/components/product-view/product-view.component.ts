@@ -9,10 +9,9 @@ import { IProduct, ProductStatus } from 'src/app/interfaces/product.interface';
 export class ProductViewComponent implements OnInit {
 
   @Input() colors = ["yellow", "red", "blue", "black"]
-  @Output() buyProduct = new EventEmitter<number>()
+  @Output() transacProduct = new EventEmitter<boolean>()
 
   chosenColor = "black"
-  chosenQuantity = 1
 
   @Input() chosenProduct : IProduct = {
     id: 0,
@@ -39,8 +38,8 @@ export class ProductViewComponent implements OnInit {
     return this.chosenProduct.status == ProductStatus.CLOSE
   }
 
-  onBuy(){
-    this.buyProduct.emit(this.chosenQuantity)
+  onOpenTransaction(){
+    this.transacProduct.emit(true)
   }
 
 }

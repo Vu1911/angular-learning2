@@ -1,7 +1,9 @@
-<div class="chart-wrapper">
-    <canvas baseChart 
-    [data]="chartData"
-    [labels]="labelChart"
-    [chartType]="chartType">
-  </canvas>
-</div>
+<google-chart #chart  
+   [title]="title"  
+   [type]="type"  
+   [data]="data"  
+   [columns]="columnNames"  
+   [options]="options"  
+   [width]="width"  
+   [height]="height">  
+</google-chart> 

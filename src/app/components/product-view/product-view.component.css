@@ -12,8 +12,7 @@
 
 .productInfo{
     width: 40%;
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
 }
 
 .productInfo * {

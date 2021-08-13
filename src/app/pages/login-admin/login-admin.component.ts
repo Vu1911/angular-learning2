@@ -10,15 +10,20 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class LoginAdminComponent implements OnInit {
 
+  loginResponse = {status: false, message: ""}
+
   constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onLogin(loginRequest: {username: string, password: string}){
-    this.accountService.onLogin(loginRequest, Role.ADMIN).subscribe((isLogin: boolean)=> {
-      console.log(isLogin)
-      this.router.navigate(["/admin"])
+    this.accountService.onLogin(loginRequest, Role.ADMIN).subscribe((loginResponse: {status: boolean, message: string})=> {
+      this.loginResponse = loginResponse
+      setTimeout(() => {
+        this.router.navigate(["/admin"])
+      }, 500)
+      
     })
   }
 }

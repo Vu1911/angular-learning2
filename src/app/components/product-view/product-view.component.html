@@ -1,20 +1,17 @@
 <div class="productContainer">
     <div class="productCard">
-        <img class="productImg" src="https://content.optimumnutrition.com/i/on/on-on-ON-US-GSW-Gainer-bundle_Image_01?locale=en-us,en-gb,*&layer0=$PDP_002$">
+        <img class="productImg" [src]="chosenProduct.imgUrl">
         <div class="productInfo">
-            <h3 class="productTitle" [innerHTML]="chosenProduct.title | colorPipe:chosenColor | safeHtmlPipe"></h3>
+            <h3 appChangeColor class="productTitle" [color]="chosenColor">{{chosenProduct.title}}</h3>
             <p>View: {{chosenProduct.viewNumber}}</p>
-            <span>---</span>
             <p>Buy: {{chosenProduct.buyNumber}}</p>
-            <span>---</span>
             <p>Remain: {{chosenProduct.quantity}}</p>
             <h3 class="productPrice">Price: {{chosenProduct.price | currency:'VND'}} </h3>
             <div class="colorChoosing">
                 <button *ngFor="let color of colors" [ngStyle]="{'background-color': color}" (click)="setChosenColor(color)"></button>
 
             </div>
-            <label>Quantity: <input type="number" min=1 max={{chosenProduct.quantity}} [(ngModel)]="chosenQuantity"></label>
-            <button class="productBuyBtn btn btn-primary" [disabled]='chosenQuantity > chosenProduct.quantity || chosenQuantity < 1 || isProductClose()' (click)='onBuy()'>Buy</button>
+            <button class="productBuyBtn btn btn-primary" [disabled]='isProductClose()' (click)='onOpenTransaction()'>Create Transaction</button>
         </div> 
 
     </div>

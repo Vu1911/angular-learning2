@@ -6,7 +6,6 @@ import { LoginUserComponent } from "./pages/login-user/login-user.component";
 import { ProductDashboardComponent } from "./pages/product-dashboard/product-dashboard.component";
 import { ProductViewPageComponent } from "./pages/product-view-page/product-view-page.component";
 import { UserDashboardComponent } from "./pages/user-dashboard/user-dashboard.component";
-import { AccountService } from "./services/account.service";
 import { AdminGuard, AuthGuard, isAreadlyLoginGuard } from "./services/authGuard.service";
 
 const appRouters: Routes = [

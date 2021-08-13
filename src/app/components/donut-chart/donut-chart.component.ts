@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { ChartType } from 'chart.js';
-import { Label, MultiDataSet } from 'ng2-charts';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChartType } from 'angular-google-charts';
+
 
 
 @Component({
@@ -8,24 +8,35 @@ import { Label, MultiDataSet } from 'ng2-charts';
   templateUrl: './donut-chart.component.html',
   styleUrls: ['./donut-chart.component.css']
 })
-export class DonutChartComponent implements OnInit, OnChanges {
+export class DonutChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() labels: string[] = []
-  @Input() data: number[] = []
+  @Input() data = []
+  @Output() isShowChart = new EventEmitter<boolean>()
 
-  labelChart: Label[] = []
-  chartType: ChartType = 'doughnut'
-  chartData: MultiDataSet = []
+  title = 'googlechart';  
+  type: ChartType = ChartType.LineChart; 
+  columnNames = ['Date', 'Quantity']
+  options = {      
+  };  
+  width = 500;  
+  height = 300;  
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
-  ngOnChanges() {
-    this.labels.forEach((title)=>{
-      this.labelChart.push(title)
-    })
-    this.chartData = [this.data]
+  ngAfterViewInit(){
+    this.showChart()
+  }
+
+  showChart(){
+    this.isShowChart.emit(true)
+  }
+
+  ngOnDestroy(){
+
   }
 
 }

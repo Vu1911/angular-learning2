@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AccountStatus, IAccount, Role } from '../interfaces/account.interface';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AccountService {
   currentAccount = 'currentAccount';
 
@@ -13,25 +13,37 @@ export class AccountService {
   onLogin(
     loginRequest: { username: string; password: string },
     role: string
-  ): Observable<boolean> {
+  ): Observable<{status: boolean, message: string}> {
     return new Observable((observer) => {
       this.onGetAccountByUsername(loginRequest.username).subscribe(
+        
         (account) => {
+          let message = ""
           let canLogin = false;
           if (account.length > 0) {
             if (account[0].role == role) {
               if (account[0].status == AccountStatus.ACTIVATED) {
                 if (account[0].password == loginRequest.password) {
                   canLogin = true;
+                  message="welcome"
                   localStorage.setItem(
                     this.currentAccount,
                     JSON.stringify(account[0])
                   );
+                } else {
+                  message = "wrong password"
                 }
+              } else {
+                message = "the acccount has been deactivated"
               }
+            } else {
+              message = "the user does not have the required role"
             }
+
+          } else {
+            message = "no such user"
           }
-          observer.next(canLogin);
+          observer.next({status: canLogin, message: message});
         }
       );
     });
@@ -107,4 +119,19 @@ export class AccountService {
       });
     });
   }
+
+  asyncValidatorUserNameDuplication(user: any): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return new Promise((resolve, reject) => {
+        this.onGetAccountByUsername(control.value).subscribe((accounts) => {
+          if (accounts.length > 0 && accounts[0].username !== user.username) {
+            resolve({ isUsernameDuplicated: true });
+          } else {
+            resolve(null);
+          }
+        });
+      });
+    }
+  }
+
 }

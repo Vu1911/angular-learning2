@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IProduct, ProductStatus } from 'src/app/interfaces/product.interface';
+import { ITransaction, TransactionType } from 'src/app/interfaces/transaction.interface';
 import { ProductService } from 'src/app/services/product.service';
+import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
   selector: 'app-product-view-page',
@@ -23,14 +25,22 @@ export class ProductViewPageComponent implements OnInit {
     buyNumber: 0,
   };
 
+  isOpenTransaction: boolean= false
+
+  data: any = []
+
+  isShowChart: boolean= false
+
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private transactionService: TransactionService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.requestId = params['id'];
+      this.updateChart()
       this.productService
         .onGetProductById(this.requestId)
         .subscribe((product: IProduct) => {
@@ -45,17 +55,57 @@ export class ProductViewPageComponent implements OnInit {
     });
   }
 
-  onBuyProduct(quantity: number) {
-    this.chosenProduct.quantity -= quantity;
-    this.chosenProduct.buyNumber += quantity;
-    if (this.chosenProduct.quantity == 0) {
-      this.chosenProduct.status = ProductStatus.CLOSE;
+  onOpenTransaction(isOpenTransaction: boolean) {
+    this.isOpenTransaction = isOpenTransaction
+  }
+
+  onCloseTransaction(isCloseTransaction: boolean){
+    this.isOpenTransaction = !isCloseTransaction
+  }
+
+  onSubmitTransaction(request: any){
+    let transaction: ITransaction = {
+      id: 0,
+      productId: 0,
+      type: TransactionType.ADD,
+      transactionAmount: 0,
+      productQuantity: 0,
+      timestamp: new Date()
     }
 
-    this.productService
-      .onUpdateProduct(this.chosenProduct)
-      .subscribe((data) => {
-        alert('buy!');
-      });
+    transaction.productId = this.requestId
+    transaction.type = request.type
+    transaction.transactionAmount = request.quantity
+    transaction.timestamp = new Date(request.date)
+    transaction.productQuantity = (transaction.type == TransactionType.ADD)? this.chosenProduct.quantity + transaction.transactionAmount : this.chosenProduct.quantity - transaction.transactionAmount
+
+    this.chosenProduct.quantity = transaction.productQuantity;
+
+    this.productService.onUpdateProduct(this.chosenProduct).subscribe((product) => {
+      this.transactionService.onCreateTransaction(transaction).subscribe((transaction)=> {
+        this.isOpenTransaction = false
+        this.isShowChart = false
+        this.updateChart()
+      })
+    })
+
+  }
+
+  updateChart(){
+    this.transactionService.onGetTransactionByProductId(this.requestId).subscribe((transactions: Array<ITransaction>)=> {
+      transactions.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : (a.id < b.id)? 1 : -1))
+
+      let dataList = (transactions.length < 10)? transactions : transactions.slice(-10)
+
+      this.data = dataList.map(data => [new Date(data.timestamp), data.productQuantity])
+
+      console.log(this.data)
+      console.log(typeof this.data[0][0])
+      this.isShowChart = true
+    })
+  }
+
+  showChart(isShowChart: boolean){
+    this.isShowChart = isShowChart
   }
 }

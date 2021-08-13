@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Label, MultiDataSet } from 'ng2-charts';
 import { IProduct, ProductStatus } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -83,18 +82,7 @@ export class ProductDashboardComponent implements OnInit {
   }
 
   updateChart(){
-    let totalViews =  this.allProducts.map(x => x.viewNumber).reduce((a, b)=> a + b)
-    let sortedViewProducts = JSON.parse(JSON.stringify(this.allProducts)).sort((a: IProduct, b: IProduct) => - a.viewNumber + b.viewNumber).slice(0,3)
-    
-    this.labels = sortedViewProducts.map((product: IProduct) => product.title)
-    this.labels.push('others')
-    
 
-    this.chartData = sortedViewProducts.map((product: IProduct) => product.viewNumber)
-    this.chartData.push(totalViews - this.chartData.reduce((a: number, b: number)=> a + b))
-
-    console.log(this.chartData)
-    console.log(this.labels)
   }
 
   getStartIndex(){

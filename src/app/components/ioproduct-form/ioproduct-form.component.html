@@ -1,0 +1,32 @@
+<div class="transactionFormContainer">
+    <form [formGroup]="transactionForm" class="text-center border border-light p-5">
+        
+        <h4 class="h4">Transaction</h4>
+        
+        <div class="formGroup radio statusRadio">
+            <h5>Status</h5>
+            <label  *ngFor="let type of transactionTypes">
+                <input
+                    type="radio"
+                    formControlName="type"
+                    [value]="type"
+                >
+                {{type}}
+            </label>
+        </div>
+
+        <div class="formGroup">
+            <label for="quantity">Transaction Quantity</label>
+            <input class="form-control mb-4" type="number" id="quantity" formControlName="quantity">
+        </div>
+
+        <div class="formGroup">
+            <label for="date">Transaction Date</label>
+            <input class="form-control mb-4" type="text" id="date" formControlName="date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)= "onSubmit(); $event.preventDefault()" [disabled]="!transactionForm.valid">Confirm</button>
+        <br>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+    </form>
+</div>

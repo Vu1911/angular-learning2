@@ -31,17 +31,15 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
-      'username' : new FormControl(null, [Validators.required], [this.accountService.checkUsernameFormDuplication.bind(this.accountService)]),
-      "email" : new FormControl(null, [Validators.required, Validators.email]),
-      "password" : new FormControl(null, [Validators.required]),
-      "dob": new FormControl(null, [Validators.required]),
+      'username' : new FormControl(this.placeholder.username, [Validators.required], [this.accountService.asyncValidatorUserNameDuplication(this.placeholder)]),
+      "email" : new FormControl(this.placeholder.email, [Validators.required, Validators.email]),
+      "password" : new FormControl(this.placeholder.password, [Validators.required]),
+      "dob": new FormControl(this.placeholder.dob.toLocaleString().split(',')[1], [Validators.required]),
       "status" : new FormControl(this.placeholder.status),
-      "role" : new FormControl(this.placeholder.role) 
+      "role" : new FormControl(this.placeholder.role)
     })
 
   }
-
-
 
   onSubmit(){
     let chosenAccount = JSON.parse(JSON.stringify(this.placeholder))

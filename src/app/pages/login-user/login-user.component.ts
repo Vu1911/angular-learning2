@@ -9,6 +9,7 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./login-user.component.css']
 })
 export class LoginUserComponent implements OnInit {
+  loginResponse = {status: false, message: ""}
 
   constructor(private accountService: AccountService, private router: Router) { }
 
@@ -17,9 +18,12 @@ export class LoginUserComponent implements OnInit {
   }
 
   onLogin(loginRequest: {username: string, password: string}){
-    this.accountService.onLogin(loginRequest, Role.USER).subscribe((isLogin: boolean)=> {
-      console.log(isLogin)
-      this.router.navigate(["/user"])
+    this.accountService.onLogin(loginRequest, Role.USER).subscribe((loginResonse: {status: boolean, message: string})=> {
+      this.loginResponse = loginResonse
+      setTimeout(() => {
+        this.router.navigate(["/user"])
+      }, 500)
+      
     })
   }
 
